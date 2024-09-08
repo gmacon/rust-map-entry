@@ -14,6 +14,7 @@ fn main() -> std::io::Result<()> {
         ("c.txt", "This is file C"),
     ] {
         let file = match files.entry(path.to_owned()) {
+            // Entry::Occupied(mut o) => o.get_mut(), // WRONG!
             Entry::Occupied(o) => o.into_mut(),
             Entry::Vacant(v) => v.insert(File::create(path)?),
         };
